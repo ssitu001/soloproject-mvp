@@ -20,7 +20,12 @@ class Dashboard extends Component {
     return (
       <div>
         <h1 className="title">Unit Dashboard</h1>
-        <UnitList />
+        <div className="units">
+          <UnitList />
+        </div>  
+        <div className="container">
+          <UnitDisplay />
+        </div> 
       </div>
     );
   }

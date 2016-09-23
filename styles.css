@@ -52,7 +52,7 @@ h1 {
 .actualUnit {
   margin-top: 5px;
 }
-.actualUnit:hover {
+.actualUnit div:hover {
   color: #c0392b;
 }
 
