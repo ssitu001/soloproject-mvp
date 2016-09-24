@@ -3,22 +3,30 @@ import { render } from 'react-dom';
 
 //component > redux = container
 import { connect } from 'react-redux';
+import { selectUnit } from '../Actions/index';
+import { bindActionCreators } from 'redux';
 
 class UnitList extends Component {
-
-  renderUnits() {
+  renderUnit() {
     return this.props.units.map((unit, i) => {
+      let unitNum = Object.keys(unit)[0];
+      let unitDesc = unit[unitNum];
+
       return (
-        <div key={i}> {Object.keys(unit)[0]} </div>
+        <div 
+        key={i}
+        onClick={() => this.props.selectUnit(unitDesc)}
+        > 
+        {unitNum} 
+        </div>
       );
     });
   }
 
   render() {
-    // let unitNum = Object.keys(this.props.currentUnit)[0];
     return (
       <div className="actualUnit">
-        {this.renderUnits()} 
+        {this.renderUnit()} 
       </div>
     )
   }
@@ -30,5 +38,12 @@ function mapStateToProps(state) {
     units: state.units
   };
 }
+
+//anything return from this function will end up as props on the unitList container
+function mapDispatchToProps(dispatch) {
+  //when selectUnit is called, the result should be passed to all of the reducers
+  return bindActionCreators({ selectUnit }, dispatch);
+}
+
 //export container
-module.exports = connect(mapStateToProps)(UnitList);
+module.exports = connect(mapStateToProps, mapDispatchToProps)(UnitList);
